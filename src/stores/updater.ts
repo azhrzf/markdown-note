@@ -2,10 +2,11 @@ import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import {
   getNotesStorage,
+  addNoteStorage,
   updateNotesStorage,
   getFoldersStorage,
+  addFolderStorage,
   updateFoldersStorage,
-  addNoteStorage,
   type Note,
   type NewNoteMetadata,
   type NewFolderMetadata
@@ -38,7 +39,13 @@ export const useNoteUpdaterStore = defineStore('noteUpdater', () => {
 export const useFolderUpdaterStore = defineStore('folderUpdater', () => {
   const folders = ref(getFoldersStorage())
 
-  console.log(folders.value)
+  function addFolder(newFolderMetadata: NewFolderMetadata) {
+    const newFolders = addFolderStorage(newFolderMetadata)
+
+    folders.value = newFolders
+
+    return newFolders
+  }
 
   function updateFolder(id: string, newFolderMetadata: NewFolderMetadata) {
     const newFolders = updateFoldersStorage(id, newFolderMetadata)
@@ -48,5 +55,5 @@ export const useFolderUpdaterStore = defineStore('folderUpdater', () => {
     return newFolders
   }
 
-  return { folders, updateFolder }
+  return { folders, addFolder, updateFolder }
 })

@@ -2,6 +2,7 @@
 import { computed } from 'vue'
 import { defineProps } from 'vue'
 import { useFolderUpdaterStore } from '@/stores/updater'
+import { findFolderNameBySlug } from '@/stores/helpers'
 
 const props = defineProps({
   note: {
@@ -18,8 +19,7 @@ const props = defineProps({
 
 const folderName = computed(() => {
   const { folders } = useFolderUpdaterStore()
-  const folder = folders.find((folder) => folder.slug === props.note.folder)
-  return folder ? folder.name : 'Unknown'
+  return findFolderNameBySlug(folders, props.note.folder)
 })
 </script>
 

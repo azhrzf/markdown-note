@@ -1,8 +1,8 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
 import ScrollPanel from 'primevue/scrollpanel'
-import EditorWrapper from '@/components/Editor/EditorWrapper.vue'
-import NavigationWrapper from '@/components/Navigation/NavigationWrapper.vue'
+import EditorWrapper from '@/components/EditorPanel/EditorWrapper.vue'
+import NavigationWrapper from '@/components/NavigationPanel/NavigationWrapper.vue'
 import 'primeicons/primeicons.css'
 </script>
 

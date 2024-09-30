@@ -1,18 +1,18 @@
 <script setup>
+import { computed } from 'vue'
 import { useFolderUpdaterStore } from '@/stores/updater'
 import FolderButton from './FolderButton.vue'
 
-const { folders } = useFolderUpdaterStore()
-
-console.log('tos', folders)
-
-const pinnedFolders = folders
-  .filter((folder) => folder.pinned)
-  .sort((a, b) => b.updatedAt - a.updatedAt)
-
-const insideFolders = folders
-  .filter((folder) => !folder.pinned)
-  .sort((a, b) => b.updatedAt - a.updatedAt)
+const pinnedFolders = computed(() =>
+  useFolderUpdaterStore()
+    .folders.filter((folder) => folder.pinned)
+    .sort((a, b) => b.updatedAt - a.updatedAt)
+)
+const insideFolders = computed(() =>
+  useFolderUpdaterStore()
+    .folders.filter((folder) => !folder.pinned)
+    .sort((a, b) => b.updatedAt - a.updatedAt)
+)
 </script>
 
 <template>

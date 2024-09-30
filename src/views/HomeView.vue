@@ -1,6 +1,6 @@
 <script setup>
 import { computed } from 'vue'
-import NotesWrapper from '@/components/Notes/NotesWrapper.vue'
+import NotesWrapper from '@/components/NotesPanel/NotesWrapper.vue'
 import { useNoteUpdaterStore } from '@/stores/updater'
 import { sortNotes } from '@/stores/helpers'
 

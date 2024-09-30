@@ -27,8 +27,11 @@ const onImageRightClick = (event) => {
 <template>
   <RouterLink
     :to="`/${props.folder.slug}`"
-    :class="{ 'bg-[#333333] text-white': props.folder.slug === folderSlug }"
-    class="px-6 py-2 flex items-center justify-between"
+    class="px-6 py-2 flex items-center justify-between transition ease-in-out duration-300"
+    :class="{
+      'bg-[#333333] text-white': props.folder.slug === folderSlug,
+      'hover:bg-[#333333] text-gray-400': props.folder.slug !== folderSlug
+    }"
     @contextmenu="onImageRightClick"
     aria-haspopup="true"
   >

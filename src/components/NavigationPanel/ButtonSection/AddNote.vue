@@ -11,10 +11,9 @@ import { useToast } from 'primevue/usetoast'
 const toast = useToast()
 const dialogVisible = ref(false)
 
-const { folders: foldersData } = useFolderUpdaterStore()
 const { addNote } = useNoteUpdaterStore()
 const selectedFolder = ref()
-const folders = computed(() => foldersData)
+const folders = computed(() => useFolderUpdaterStore().folders)
 
 const title = ref('New Note')
 
@@ -47,10 +46,10 @@ const handleSubmit = () => {
 <template>
   <Toast />
   <button
-    class="bg-[#242424] py-2 space-x-2 w-full rounded-md flex items-center justify-center transition ease-in-out duration-200 hover:bg-[#333333]"
+    class="text-xs bg-[#242424] py-2 space-x-2 w-full rounded-md flex items-center justify-center transition ease-in-out duration-300 hover:bg-[#333333]"
     @click="dialogVisible = true"
   >
-    <i class="pi pi-plus"></i><span>New Note</span>
+    <i class="pi pi-file" style="font-size: 0.75rem"></i><span>New Note</span>
   </button>
   <Dialog
     v-model:visible="dialogVisible"
@@ -89,7 +88,7 @@ const handleSubmit = () => {
           type="submit"
           label="Save"
           @click="dialogVisible = false"
-          class="bg-[#242424] rounded-md px-3 py-1 transition ease-in-out duration-200 hover:bg-[#333333]"
+          class="bg-[#242424] rounded-md px-3 py-1 transition ease-in-out duration-300 hover:bg-[#333333]"
           >Create</Button
         >
       </div>

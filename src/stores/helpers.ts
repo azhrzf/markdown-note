@@ -1,8 +1,13 @@
-import { type Note } from './storage'
+import { type Note, type Folder } from './storage'
 
 interface FirestoreTimestamp {
   seconds: number
   nanoseconds: number
+}
+
+export function findFolderNameBySlug(folders: Folder[], slug: string): string {
+  const folder = folders.find((folder) => folder.slug === slug)
+  return folder ? folder.name : 'Undefined'
 }
 
 export function sortNotes(notes: Note[]): Note[] {
@@ -14,8 +19,9 @@ export function sortNotes(notes: Note[]): Note[] {
 }
 
 export function trimWords(words: string, maxWords: number): string {
-  if (words.split(' ').length > maxWords) {
-    return words.split(' ').slice(0, maxWords).join(' ') + '...'
+  const wordArray = words.trim().split(/\s+/) // Split by one or more spaces
+  if (wordArray.length > maxWords) {
+    return wordArray.slice(0, maxWords).join(' ') + '...'
   }
   return words
 }

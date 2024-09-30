@@ -5,7 +5,7 @@ import { RouterLink } from 'vue-router'
 <template>
   <div>
     <RouterLink to="/">
-      <h1 class="text-2xl font-semibold italic transition ease-in-out duration-200 hover:scale-95">
+      <h1 class="text-2xl font-semibold italic transition ease-in-out duration-300 hover:scale-95">
         Markdown Note
       </h1>
     </RouterLink>

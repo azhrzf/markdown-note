@@ -21,7 +21,7 @@ const props = defineProps({
 
 <template>
   <article
-    class="bg-[#232323] p-4 rounded-sm transition ease-in-out duration-200 hover:bg-[#333333]"
+    class="bg-[#232323] p-4 rounded-sm transition ease-in-out duration-300 hover:bg-[#333333]"
   >
     <RouterLink :to="`/${props.note.folder}/${props.note.id}`">
       <h2 class="font-semibold">{{ trimWords(props.note.title, 8) }}</h2>

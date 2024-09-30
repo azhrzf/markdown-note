@@ -23,10 +23,10 @@ const latestNotes = computed(() => {
         v-for="note in latestNotes"
         :key="note.id"
         :to="`/${note.folder}/${note.id}`"
-        class="px-6 py-2 flex items-center justify-between transition ease-in-out duration-200"
+        class="px-6 py-2 flex items-center justify-between transition ease-in-out duration-300"
         :class="{
           'bg-[#333333] text-white': note.id === currentNoteId,
-          'hover:bg-[#333333] text-gray-500 ': note.id !== currentNoteId
+          'hover:bg-[#333333] text-gray-400 ': note.id !== currentNoteId
         }"
       >
         <div class="space-x-2 text-xs flex items-center">
