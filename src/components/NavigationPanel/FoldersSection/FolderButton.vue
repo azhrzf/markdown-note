@@ -26,7 +26,7 @@ const onImageRightClick = (event) => {
 
 <template>
   <RouterLink
-    :to="`/${props.folder.slug}`"
+    :to="`/n/${props.folder.slug}`"
     class="px-6 py-2 flex items-center justify-between transition ease-in-out duration-300"
     :class="{
       'bg-[#333333] text-white': props.folder.slug === folderSlug,

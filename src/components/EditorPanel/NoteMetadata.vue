@@ -1,11 +1,12 @@
-<script setup>
+<script setup lang="ts">
 import { ref, computed, watch } from 'vue'
 import { defineProps } from 'vue'
-import { useFolderUpdaterStore } from '@/stores/updater'
+import { useNoteUpdaterStore, useFolderUpdaterStore } from '@/stores/updater'
 import { findFolderNameBySlug } from '@/stores/helpers'
+import { type Folder } from '@/stores/storage'
 import Textarea from 'primevue/textarea'
 import Select from 'primevue/select'
-import { useNoteUpdaterStore } from '@/stores/updater'
+import { formatTimestamp } from '@/stores/helpers'
 
 const props = defineProps({
   note: {
@@ -40,19 +41,19 @@ function handleTitleBlur() {
 }
 
 const editFolder = ref(false)
-const selectedFolder = ref(null)
+const selectedFolder = ref<Folder | null>(null)
 
 watch(
   [folders, () => props.note.folder],
   ([newFolders, newFolderSlug]) => {
-    selectedFolder.value = newFolders.find((folder) => folder.slug === newFolderSlug)
+    selectedFolder.value = newFolders.find((folder: Folder) => folder.slug === newFolderSlug)
   },
   { immediate: true }
 )
 
 const { updateNotes } = useNoteUpdaterStore()
 
-function handleFolderChange(event) {
+function handleFolderChange(event: { value: { slug: string } }) {
   updateNotes(props.note.id, {
     title: props.note.title,
     content: props.note.content,
@@ -86,14 +87,14 @@ function handleFolderChange(event) {
           <td><i class="cols-3 pi pi-calendar text-gray-400"></i></td>
           <td><p class="cols-1 text-xs px-4 text-gray-400">Created</p></td>
           <td>
-            <p class="cols-2 text-xs">{{ props.note.createdAt }}</p>
+            <p class="cols-2 text-xs">{{ formatTimestamp(props.note.createdAt, true) }}</p>
           </td>
         </tr>
         <tr>
           <td><i class="cols-3 pi pi-calendar text-gray-400"></i></td>
           <td><p class="cols-1 text-xs px-4 text-gray-400">Updated</p></td>
           <td>
-            <p class="cols-2 text-xs">{{ props.note.updatedAt }}</p>
+            <p class="cols-2 text-xs">{{ formatTimestamp(props.note.updatedAt, true) }}</p>
           </td>
         </tr>
         <tr>

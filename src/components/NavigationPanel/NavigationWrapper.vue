@@ -4,6 +4,7 @@ import ButtonWrapper from './ButtonSection/ButtonWrapper.vue'
 import RecentsNotes from './NotesSection/RecentsNotes.vue'
 import FoldersInside from './FoldersSection/FoldersInside.vue'
 import MoreNav from './OthersSection/MoreNav.vue'
+import PlaygroundWrapper from './PlaygroundSection/PlaygroundWrapper.vue'
 </script>
 
 <template>
@@ -12,6 +13,7 @@ import MoreNav from './OthersSection/MoreNav.vue'
       <BrandTitle />
       <ButtonWrapper />
     </div>
+    <PlaygroundWrapper />
     <RecentsNotes />
     <FoldersInside />
     <MoreNav />

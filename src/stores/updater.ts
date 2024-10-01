@@ -57,3 +57,15 @@ export const useFolderUpdaterStore = defineStore('folderUpdater', () => {
 
   return { folders, addFolder, updateFolder }
 })
+
+export const useFreeEditorStore = defineStore('freeEditor', () => {
+  const text = ref('> **~~<u>*Welcome to Markdown Notes*</u>~~**')
+
+  function setText(newText: string) {
+    text.value = newText
+
+    return newText
+  }
+
+  return { text, setText }
+})

@@ -3,7 +3,6 @@ import { RouterLink } from 'vue-router'
 import { formatTimestamp } from '@/stores/helpers'
 import { trimWords } from '@/stores/helpers'
 import removeMd from 'remove-markdown'
-import { useNoteUpdaterStore } from '@/stores/updater'
 import { Timestamp } from 'firebase/firestore'
 
 const props = defineProps({
@@ -23,7 +22,7 @@ const props = defineProps({
   <article
     class="bg-[#232323] p-4 rounded-sm transition ease-in-out duration-300 hover:bg-[#333333]"
   >
-    <RouterLink :to="`/${props.note.folder}/${props.note.id}`">
+    <RouterLink :to="`/n/${props.note.folder}/${props.note.id}`">
       <h2 class="font-semibold">{{ trimWords(props.note.title, 8) }}</h2>
       <p class="mt-2 text-xs text-gray-400">
         {{ formatTimestamp(props.note.updatedAt) }}

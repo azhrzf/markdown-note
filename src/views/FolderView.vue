@@ -5,6 +5,7 @@ import NotesWrapper from '@/components/NotesPanel/NotesWrapper.vue'
 import { useNoteUpdaterStore, useFolderUpdaterStore } from '@/stores/updater'
 import EmptyNote from '@/components/NotesPanel/EmptyNote.vue'
 import { sortNotes, findFolderNameBySlug } from '@/stores/helpers'
+import MainWrapper from '@/wrapper/MainWrapper.vue'
 
 const route = useRoute()
 
@@ -19,9 +20,11 @@ const folderName = computed(() => {
 </script>
 
 <template>
-  <div class="py-6 px-7 space-y-5">
-    <h2 class="text-xl font-semibold">{{ folderName }}</h2>
-    <NotesWrapper v-if="filteredNotes.length > 0" :notes="filteredNotes" />
-    <EmptyNote v-else />
-  </div>
+  <MainWrapper>
+    <div class="py-6 px-7 space-y-5">
+      <h2 class="text-xl font-semibold">{{ folderName }}</h2>
+      <NotesWrapper v-if="filteredNotes.length > 0" :notes="filteredNotes" />
+      <EmptyNote v-else />
+    </div>
+  </MainWrapper>
 </template>
