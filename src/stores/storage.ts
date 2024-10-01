@@ -22,6 +22,9 @@ export interface Note {
   title: string
   content: string
   folder: string
+  pinned: boolean
+  favorited: boolean
+  deleted: boolean
   createdAt: Timestamp
   updatedAt: Timestamp
 }
@@ -29,6 +32,7 @@ export interface Note {
 export interface NewNoteMetadata {
   title: string
   content: string
+  folder: string
 }
 
 export function getNotesStorage() {
@@ -39,15 +43,19 @@ export function getNotesStorage() {
   return item ? JSON.parse(item) : []
 }
 
-export function addNoteStorage(newNoteMetadata: NewNoteMetadata, folderSlug: string) {
+export function addNoteStorage(newNoteMetadata: NewNoteMetadata) {
   const notes = getNotesStorage()
 
   const newNote = {
     id: (notes.length + 1).toString(),
-    folder: folderSlug,
+    title: newNoteMetadata.title.trim(),
+    content: newNoteMetadata.content.trim(),
+    folder: newNoteMetadata.folder,
+    pinned: false,
+    favorited: false,
+    deleted: false,
     createdAt: Timestamp.now(),
-    updatedAt: Timestamp.now(),
-    ...newNoteMetadata
+    updatedAt: Timestamp.now()
   }
 
   localStorage.setItem('notes', JSON.stringify([...notes, newNote]))
@@ -55,10 +63,10 @@ export function addNoteStorage(newNoteMetadata: NewNoteMetadata, folderSlug: str
   return [...notes, newNote]
 }
 
-export function updateNotesStorage(id: string, newContent: string) {
+export function updateNotesStorage(id: string, newNoteMetadata: NewNoteMetadata) {
   const notes = getNotesStorage().map((note: Note) => {
     if (note.id === id) {
-      return { ...note, content: newContent, updatedAt: Timestamp.now() }
+      return { ...note, ...newNoteMetadata, updatedAt: Timestamp.now() }
     }
     return note
   })
@@ -99,7 +107,7 @@ export function addFolderStorage(newFolderMetadata: NewFolderMetadata) {
 
   const newFolder = {
     id: `${getTime()}`,
-    name,
+    name: name.trim(),
     slug: slugHandler,
     pinned,
     createdAt: Timestamp.now(),

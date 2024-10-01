@@ -1,4 +1,4 @@
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 import { defineStore } from 'pinia'
 import {
   getNotesStorage,
@@ -19,15 +19,15 @@ export const useNoteUpdaterStore = defineStore('noteUpdater', () => {
     return notes.value.find((note: Note) => note.id === id)
   }
 
-  function addNote(newNoteMetadata: NewNoteMetadata, folderSlug: string) {
-    const newNotes = addNoteStorage(newNoteMetadata, folderSlug)
+  function addNote(newNoteMetadata: NewNoteMetadata) {
+    const newNotes = addNoteStorage(newNoteMetadata)
     notes.value = newNotes
 
     return newNotes
   }
 
-  function updateNotes(id: string, newContent: string) {
-    const newNotes = updateNotesStorage(id, newContent)
+  function updateNotes(id: string, newNoteMetadata: NewNoteMetadata) {
+    const newNotes = updateNotesStorage(id, newNoteMetadata)
     notes.value = newNotes
 
     return newNotes

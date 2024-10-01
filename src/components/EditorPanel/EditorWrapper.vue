@@ -9,27 +9,36 @@ import { formatTimestamp } from '@/stores/helpers'
 
 const route = useRoute()
 const currentNoteId = computed(() => route.params.noteId)
+const lastValidNoteId = ref(currentNoteId.value)
 
 const { getCurrentNote, updateNotes } = useNoteUpdaterStore()
+const currentNote = ref(getCurrentNote(currentNoteId.value))
 
-const currentNote = getCurrentNote(currentNoteId.value)
-const text = ref(currentNote?.content || '')
-const fullMetadata = ref(currentNote || {})
+const text = ref(currentNote.value?.content || '')
+const fullMetadata = ref(currentNote.value || {})
 
 watch(currentNoteId, (newNoteId) => {
-  const newNote = getCurrentNote(newNoteId)
-  text.value = newNote.content || ''
-  const castNewValue = {
-    ...newNote,
-    createdAt: formatTimestamp(newNote.createdAt, true),
-    updatedAt: formatTimestamp(newNote.updatedAt, true)
-  }
+  if (newNoteId) {
+    lastValidNoteId.value = newNoteId
+    const newNote = getCurrentNote(newNoteId)
+    currentNote.value = newNote
+    text.value = newNote.content || ''
+    const castNewValue = {
+      ...newNote,
+      createdAt: formatTimestamp(newNote.createdAt, true),
+      updatedAt: formatTimestamp(newNote.updatedAt, true)
+    }
 
-  fullMetadata.value = castNewValue
+    fullMetadata.value = castNewValue
+  }
 })
 
 const handleTextChange = (newContent) => {
-  updateNotes(currentNoteId.value, newContent)
+  updateNotes(lastValidNoteId.value, {
+    title: currentNote.value.title,
+    content: newContent,
+    folder: currentNote.value.folder
+  })
 }
 </script>
 

@@ -6,7 +6,7 @@ import { RouterLink } from 'vue-router'
   <div>
     <RouterLink to="/">
       <h1 class="text-2xl font-semibold italic transition ease-in-out duration-300 hover:scale-95">
-        Markdown Note
+        Markdown Notes
       </h1>
     </RouterLink>
     <p class="text-xs text-gray-400 italic">

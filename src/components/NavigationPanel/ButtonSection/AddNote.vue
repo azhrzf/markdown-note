@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 import Dialog from 'primevue/dialog'
 import InputText from 'primevue/inputtext'
 import Select from 'primevue/select'
@@ -7,29 +7,40 @@ import { useFolderUpdaterStore } from '@/stores/updater'
 import { useNoteUpdaterStore } from '@/stores/updater'
 import Toast from 'primevue/toast'
 import { useToast } from 'primevue/usetoast'
+import { useRoute } from 'vue-router'
 
 const toast = useToast()
 const dialogVisible = ref(false)
 
+const route = useRoute()
+const currentFolderSlug = computed(() => route.params.folderSlug || '')
+
 const { addNote } = useNoteUpdaterStore()
-const selectedFolder = ref()
 const folders = computed(() => useFolderUpdaterStore().folders)
 
+const selectedFolder = ref(folders.value.find((folder) => folder.slug === currentFolderSlug.value))
 const title = ref('New Note')
+
+watch(
+  [folders, currentFolderSlug],
+  ([newFolders, newFolderSlug]) => {
+    selectedFolder.value = newFolders.find((folder) => folder.slug === newFolderSlug)
+  },
+  { immediate: true }
+)
 
 const handleSubmit = () => {
   if (!selectedFolder.value || !title.value) {
     toast.add({ severity: 'error', summary: 'Error', detail: 'Incomplete data', life: 3000 })
   } else {
-    const note = addNote(
-      {
-        title: title.value,
-        content: '**~~*Hello World!*~~**'
-      },
-      selectedFolder.value.slug
-    )
+    const note = addNote({
+      title: title.value,
+      content: '**~~*Hello World!*~~**',
+      folder: selectedFolder.value.slug
+    })
     if (note) {
       toast.add({ severity: 'success', summary: 'Success', detail: 'Note created', life: 3000 })
+      console.log(note)
     } else {
       toast.add({
         severity: 'error',
@@ -39,7 +50,7 @@ const handleSubmit = () => {
       })
     }
   }
-  visible.value = false
+  dialogVisible.value = false
 }
 </script>
 
