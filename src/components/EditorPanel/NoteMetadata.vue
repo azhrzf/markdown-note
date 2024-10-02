@@ -65,14 +65,7 @@ function handleFolderChange(event: { value: { slug: string } }) {
 <template>
   <div class="space-y-5">
     <div class="space-x-2">
-      <Textarea
-        v-if="editTitle"
-        v-model="title"
-        rows="5"
-        cols="30"
-        class="w-full"
-        @blur="handleTitleBlur"
-      />
+      <Textarea v-if="editTitle" v-model="title" class="w-full" @blur="handleTitleBlur" />
       <h2 v-else class="inline text-xl font-semibold">{{ title }}</h2>
       <button
         @click="editTitle = !editTitle"

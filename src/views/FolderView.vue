@@ -21,7 +21,7 @@ const folderName = computed(() => {
 
 <template>
   <MainWrapper>
-    <div class="py-6 px-7 space-y-5">
+    <div class="bg-[#1C1C1C] py-6 px-7 space-y-5">
       <h2 class="text-xl font-semibold">{{ folderName }}</h2>
       <NotesWrapper v-if="filteredNotes.length > 0" :notes="filteredNotes" />
       <EmptyNote v-else />

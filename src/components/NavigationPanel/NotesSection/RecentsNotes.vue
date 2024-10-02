@@ -17,7 +17,7 @@ const latestNotes = computed(() => {
 
 <template>
   <div class="space-y-2">
-    <p class="text-xs text-gray-400 px-6">Recents</p>
+    <p class="text-xs text-gray-400 px-6">Recent Notes</p>
     <RouterLink
       v-for="note in latestNotes"
       :key="note.id"

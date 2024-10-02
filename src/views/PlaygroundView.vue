@@ -1,18 +1,17 @@
 <script setup lang="ts">
 import FreeEditor from '@/components/EditorPanel/FreeEditor.vue'
-import ScrollPanel from 'primevue/scrollpanel'
 </script>
 
 <template>
-  <ScrollPanel class="col-span-10">
-    <div class="py-6 px-7 space-y-5 h-full">
-      <div>
-        <h2 class="text-xl font-semibold">Markdown Playground</h2>
-        <p class="text-gray-400">
-          Use this playground to try out markdown, write something down, or practice.
-        </p>
-      </div>
-      <FreeEditor />
+  <div
+    class="col-span-10 py-6 px-4 md:px-6 space-y-5 min-h-screen overflow-visible md:overflow-y-scroll custom-scrollbar"
+  >
+    <div>
+      <h2 class="text-xl font-semibold">Markdown Playground</h2>
+      <p class="text-gray-400">
+        Use this playground to try out markdown, write something down, or practice.
+      </p>
     </div>
-  </ScrollPanel>
+    <FreeEditor />
+  </div>
 </template>

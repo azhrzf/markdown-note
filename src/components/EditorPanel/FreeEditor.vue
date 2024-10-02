@@ -13,7 +13,7 @@ const handleTextPlaceholderChange = (newContent: string) => {
 </script>
 
 <template>
-  <div class="space-y-6 h-full w-full">
+  <div class="space-y-6 h-screen w-full">
     <MdEditor
       class="markdown-editor"
       v-model="textPlaceholder"

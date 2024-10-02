@@ -46,7 +46,7 @@ const handleTextPlaceholderChange = (newContent: string) => {
 </script>
 
 <template>
-  <div v-if="fullMetadata.title" class="space-y-6 h-full w-full">
+  <div v-if="fullMetadata.title" class="h-screen mb-4 space-y-6">
     <NoteMetadata :note="fullMetadata" />
     <MdEditor
       class="markdown-editor"
@@ -56,9 +56,9 @@ const handleTextPlaceholderChange = (newContent: string) => {
       @change="handleTextChange"
     />
   </div>
-  <div v-else class="space-y-6 h-full w-full">
+  <div v-else class="space-y-6 h-screen">
     <div>
-      <h2 class="text-xl">Welcome to Markdown Notes</h2>
+      <h2 class="text-xl text-white">Welcome to Markdown Notes</h2>
       <p class="text-gray-400">
         Select, create a new note, or use the
         <RouterLink to="playground" class="underline hover:text-white"> playground </RouterLink>
