@@ -13,7 +13,7 @@ import DrawerWrapper from './components/NavigationPanel/DrawerSection/DrawerWrap
     class="text-white bg-[#181818] md:grid grid-cols-12 md:h-screen overflow-visible md:overflow-hidden"
   >
     <section
-      class="col-span-2 py-6 hidden lg:block overflow-visible md:overflow-y-scroll custom-scrollbar"
+      class="col-span-2 py-6 h-full hidden lg:block overflow-visible md:overflow-y-scroll custom-scrollbar"
     >
       <NavigationWrapper />
     </section>
@@ -22,6 +22,11 @@ import DrawerWrapper from './components/NavigationPanel/DrawerSection/DrawerWrap
 </template>
 
 <style>
+/* .p-drawer {
+  background-color: #181818 !important;
+  color: white;
+} */
+
 .custom-scrollbar::-webkit-scrollbar {
   width: 12px;
 }
